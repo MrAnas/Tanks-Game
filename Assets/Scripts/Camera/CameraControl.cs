@@ -4,7 +4,7 @@ public class CameraControl : MonoBehaviour
 {
     public float m_DampTime = 0.2f;                 
     public float m_ScreenEdgeBuffer = 4f;           
-    public float m_MinSize = 6.5f;                  
+    public float m_MinSize = 15f;                  
     /*[HideInInspector]*/ public Transform[] m_Targets; 
 
 
@@ -67,9 +67,9 @@ public class CameraControl : MonoBehaviour
 
     private float FindRequiredSize()
     {
-        Vector3 desiredLocalPos = transform.InverseTransformPoint(m_DesiredPosition);
+        Vector3 desiredLocalPos = transform.InverseTransformPoint(m_DesiredPosition); // Didn't understand the use of this command.
 
-        float size = 0f;
+		float size = 0f;
 
         for (int i = 0; i < m_Targets.Length; i++)
         {
@@ -80,9 +80,9 @@ public class CameraControl : MonoBehaviour
 
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
 
-            size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.y));
+            size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.y));// What about other tanks?
 
-            size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.x) / m_Camera.aspect);
+            size = Mathf.Max (size, Mathf.Abs (desiredPosToTarget.x) / m_Camera.aspect); 
         }
         
         size += m_ScreenEdgeBuffer;
